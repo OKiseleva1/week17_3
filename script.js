@@ -1,10 +1,21 @@
 const button = document.querySelector("button");
 const comments = document.querySelector (".comments");
 const textarea = document.querySelector("textarea");
+const username =document.querySelector(".username");
 
 let arr = [];
 
 button.addEventListener("click", function() {
+    let name = localStorage.getItem('name');
+    if (name!= null){
+        username.value = name;
+    }
+
+    if (name == null){
+        localStorage.setItem('name', username.value);
+    }
+
+
 let text= textarea.value;
 textarea.value = "";
 
@@ -30,7 +41,7 @@ function render (parentNode, data){
 
         let node = document.createElement('div');
         node.classList.add('comment');
-        node.textContent=filteredText;
+        node.textContent=username.value + ": " + filteredText;
 
         let deleteButton = document.createElement('button');
         deleteButton.classList.add('comment_button');
@@ -46,3 +57,4 @@ function render (parentNode, data){
         
         }
 }
+
